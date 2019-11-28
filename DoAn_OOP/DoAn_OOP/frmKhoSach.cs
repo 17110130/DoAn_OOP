@@ -103,6 +103,7 @@ namespace DoAn_OOP
                 db.SubmitChanges();
                 Load_datasach();
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show("lỗi1!!"); throw ex;
