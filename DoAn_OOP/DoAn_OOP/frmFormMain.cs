@@ -16,5 +16,11 @@ namespace DoAn_OOP
         {
             InitializeComponent();
         }
+
+        private void btnQuanLyKhoSach_Click(object sender, EventArgs e)
+        {
+            
+            
+        }
     }
 }
