@@ -16,7 +16,7 @@ namespace DoAn_OOP
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmFormMain());
+            Application.Run(new frmKhoSach(null));
         }
     }
 }
