@@ -47,6 +47,7 @@
             this.btnQuanLyKhoSach.TabIndex = 0;
             this.btnQuanLyKhoSach.Text = "Quản Lý Kho Sách";
             this.btnQuanLyKhoSach.UseVisualStyleBackColor = true;
+            this.btnQuanLyKhoSach.Click += new System.EventHandler(this.btnQuanLyKhoSach_Click);
             // 
             // btnDocGia
             // 
@@ -98,7 +99,7 @@
             this.btnThongKe.Text = "Thống Kê";
             this.btnThongKe.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // frmFormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -110,7 +111,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnDocGia);
             this.Controls.Add(this.btnQuanLyKhoSach);
-            this.Name = "Form1";
+            this.Name = "frmFormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Phần mềm quản lý thư viện";
             this.ResumeLayout(false);
