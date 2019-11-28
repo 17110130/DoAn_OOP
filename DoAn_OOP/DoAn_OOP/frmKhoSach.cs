@@ -41,6 +41,7 @@ namespace DoAn_OOP
         {
             cbbNhaXuatBan.DataSource = db.NhaXuatBans.ToList();            
             cbbNhaXuatBan.DisplayMember = "IDNhaXuatBan";
+            cbbNhaXuatBan.ValueMember= "IDNhaXuatBan";
             cbbNhaXuatBan.SelectedIndex = -1;
         }
 
@@ -87,7 +88,7 @@ namespace DoAn_OOP
             else if (id < 100) mh = mh + "00" + id;
             else if (id < 1000) mh = mh + "0" + id;
             else mh = (mh + id).ToString();
-            var idsach = txtMaSach.Text.Substring(0,0).ToUpper() + mh;
+            var idsach = txtMaSach.Text.Substring(0, 0).ToUpper() + mh;
 
             try
             {
@@ -104,14 +105,16 @@ namespace DoAn_OOP
                 Load_datasach();
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("lỗi1!!"); throw ex;
+                MessageBox.Show("Không thêm được!!","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Error);
+ 
             }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
+            QLThuvien1DataContext db = new QLThuvien1DataContext();
             ThongTinSach sach = new ThongTinSach();
             try
             {
@@ -119,23 +122,24 @@ namespace DoAn_OOP
                 sach.IDTheLoai = cbbTheLoai.Text;
                 sach.TenSach = txtTenSach.Text;
                 sach.TacGia = txtTacGia.Text;
-                sach.NhaXuatBan = cbbNhaXuatBan.Text;
+                sach.NhaXuatBan = cbbNhaXuatBan.SelectedValue.ToString();
                 sach.NgayNhapKho = DateTime.Parse(dtpNgayNhapKho.Text);
                 sach.Gia = int.Parse(txtGiaSach.Text);
                 sach.TonKe = int.Parse(txtTonKho.Text);
                 db.SubmitChanges();
                 Load_datasach();
-
             }
             catch(Exception)
-            { 
-                MessageBox.Show("lỗi rồi");                
-            }            
+            {
+                MessageBox.Show("Không sửa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               
+            }           
 
         }
 
         private void btnXoaThongTin_Click(object sender, EventArgs e)
         {
+            QLThuvien1DataContext db = new QLThuvien1DataContext();
             ThongTinSach sach = new ThongTinSach();
             try               
             {
@@ -143,7 +147,7 @@ namespace DoAn_OOP
                 sach.IDTheLoai = cbbTheLoai.Text;
                 sach.TenSach = txtTenSach.Text;
                 sach.TacGia = txtTacGia.Text;
-                sach.NhaXuatBan = cbbNhaXuatBan.Text;
+                sach.NhaXuatBan = cbbNhaXuatBan.SelectedValue.ToString();
                 sach.NgayNhapKho = DateTime.Parse(dtpNgayNhapKho.Text);
                 sach.Gia = int.Parse(txtGiaSach.Text);
                 sach.TonKe = int.Parse(txtTonKho.Text);
@@ -159,7 +163,7 @@ namespace DoAn_OOP
                 this.txtGiaSach.Text = "";
                 this.txtTonKho.Text = "";
             }
-            catch (Exception) { MessageBox.Show("lỗi3"); }
+            catch (Exception) { MessageBox.Show("Không xóa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
         }
     }
