@@ -103,9 +103,9 @@ namespace DoAn_OOP
                 db.SubmitChanges();
                 Load_datasach();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("lỗi1!!");
+                MessageBox.Show("lỗi1!!"); throw ex;
             }
         }
 

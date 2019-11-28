@@ -73,7 +73,7 @@ namespace DoAn_OOP
                 db.SubmitChanges();
                 Load_data_NXB();
             }
-            catch (Exception) { MessageBox.Show("lỗi"); }
+            catch (Exception ex) { MessageBox.Show("lỗi");throw ex; }
 
         }
     }
