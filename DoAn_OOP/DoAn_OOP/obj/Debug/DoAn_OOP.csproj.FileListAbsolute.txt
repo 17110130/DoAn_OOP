@@ -1,0 +1,10 @@
+C:\Users\Admin\Desktop\OOP\DoAn_OOP\DoAn_OOP\bin\Debug\DoAn_OOP.exe.config
+C:\Users\Admin\Desktop\OOP\DoAn_OOP\DoAn_OOP\bin\Debug\DoAn_OOP.exe
+C:\Users\Admin\Desktop\OOP\DoAn_OOP\DoAn_OOP\bin\Debug\DoAn_OOP.pdb
+C:\Users\Admin\Desktop\OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.Form1.resources
+C:\Users\Admin\Desktop\OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.Properties.Resources.resources
+C:\Users\Admin\Desktop\OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.csproj.GenerateResource.cache
+C:\Users\Admin\Desktop\OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.exe
+C:\Users\Admin\Desktop\OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.pdb
