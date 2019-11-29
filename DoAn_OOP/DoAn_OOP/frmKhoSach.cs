@@ -15,7 +15,7 @@ namespace DoAn_OOP
         public frmKhoSach(string idsach)
         {
             InitializeComponent();
-            this.idsach = idsach;
+            this.idsach = idsach;            
         }
         QLThuvien1DataContext db = new QLThuvien1DataContext();
         private string idsach;
@@ -34,13 +34,14 @@ namespace DoAn_OOP
         public void Load_cbbtheloai()
         {
             cbbTheLoai.DataSource = db.TheLoais.ToList();
-            cbbTheLoai.DisplayMember = "IDTheLoai";
+            cbbTheLoai.DisplayMember = "TenTheLoai";
+            cbbTheLoai.ValueMember = "IDTheLoai";
             cbbTheLoai.SelectedIndex = -1;
         }
         public void Load_cbbnhaxb()
         {
             cbbNhaXuatBan.DataSource = db.NhaXuatBans.ToList();            
-            cbbNhaXuatBan.DisplayMember = "IDNhaXuatBan";
+            cbbNhaXuatBan.DisplayMember = "TenNhaXuatBan";
             cbbNhaXuatBan.ValueMember= "IDNhaXuatBan";
             cbbNhaXuatBan.SelectedIndex = -1;
         }
@@ -77,7 +78,7 @@ namespace DoAn_OOP
             this.txtTonKho.Text = "";
 
         }
-
+        
         private void btnThem_Click(object sender, EventArgs e)
         {
             ThongTinSach sach = new ThongTinSach();
@@ -90,13 +91,15 @@ namespace DoAn_OOP
             else mh = (mh + id).ToString();
             var idsach = txtMaSach.Text.Substring(0, 0).ToUpper() + mh;
 
+            ////var idtl = (from s in db.TheLoais where (s.TenTheLoai == cbbTheLoai.SelectedValue.ToString()) select s.IDTheloai).ToList();
+
             try
             {
-                sach.IDTheLoai = cbbTheLoai.Text;
+                sach.IDTheLoai = cbbTheLoai.SelectedValue.ToString();
                 sach.IDSach = idsach;
                 sach.TenSach = txtTenSach.Text;
                 sach.TacGia = txtTacGia.Text;
-                sach.NhaXuatBan = cbbNhaXuatBan.Text;
+                sach.NhaXuatBan = cbbNhaXuatBan.SelectedValue.ToString();
                 sach.NgayNhapKho = DateTime.Parse(dtpNgayNhapKho.Text);
                 sach.Gia = int.Parse(txtGiaSach.Text);
                 sach.TonKe = int.Parse(txtTonKho.Text);
