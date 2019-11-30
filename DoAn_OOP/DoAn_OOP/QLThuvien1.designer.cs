@@ -51,16 +51,16 @@ namespace DoAn_OOP
     partial void InsertTheLoai(TheLoai instance);
     partial void UpdateTheLoai(TheLoai instance);
     partial void DeleteTheLoai(TheLoai instance);
-    partial void InsertThongTinSach(ThongTinSach instance);
-    partial void UpdateThongTinSach(ThongTinSach instance);
-    partial void DeleteThongTinSach(ThongTinSach instance);
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
+    partial void InsertThongTinSach(ThongTinSach instance);
+    partial void UpdateThongTinSach(ThongTinSach instance);
+    partial void DeleteThongTinSach(ThongTinSach instance);
     #endregion
 		
 		public QLThuvien1DataContext() : 
-				base(global::DoAn_OOP.Properties.Settings.Default.QLThuvienConnectionString, mappingSource)
+				base(global::DoAn_OOP.Properties.Settings.Default.QLThuvienConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -145,19 +145,19 @@ namespace DoAn_OOP
 			}
 		}
 		
-		public System.Data.Linq.Table<ThongTinSach> ThongTinSaches
-		{
-			get
-			{
-				return this.GetTable<ThongTinSach>();
-			}
-		}
-		
 		public System.Data.Linq.Table<User> Users
 		{
 			get
 			{
 				return this.GetTable<User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ThongTinSach> ThongTinSaches
+		{
+			get
+			{
+				return this.GetTable<ThongTinSach>();
 			}
 		}
 	}
@@ -172,10 +172,6 @@ namespace DoAn_OOP
 		
 		private string _IDSach;
 		
-		private System.Nullable<System.DateTime> _NgayMuon;
-		
-		private System.Nullable<System.DateTime> _NgayTra;
-		
 		private EntityRef<PhieuMuon> _PhieuMuon;
 		
 		private EntityRef<ThongTinSach> _ThongTinSach;
@@ -188,10 +184,6 @@ namespace DoAn_OOP
     partial void OnIDPhieuMuonChanged();
     partial void OnIDSachChanging(string value);
     partial void OnIDSachChanged();
-    partial void OnNgayMuonChanging(System.Nullable<System.DateTime> value);
-    partial void OnNgayMuonChanged();
-    partial void OnNgayTraChanging(System.Nullable<System.DateTime> value);
-    partial void OnNgayTraChanged();
     #endregion
 		
 		public ChiTietMuon()
@@ -212,7 +204,7 @@ namespace DoAn_OOP
 			{
 				if ((this._IDPhieuMuon != value))
 				{
-					if (this._ThongTinSach.HasLoadedOrAssignedValue)
+					if (this._PhieuMuon.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -236,7 +228,7 @@ namespace DoAn_OOP
 			{
 				if ((this._IDSach != value))
 				{
-					if (this._PhieuMuon.HasLoadedOrAssignedValue)
+					if (this._ThongTinSach.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -249,47 +241,7 @@ namespace DoAn_OOP
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NgayMuon", DbType="DateTime")]
-		public System.Nullable<System.DateTime> NgayMuon
-		{
-			get
-			{
-				return this._NgayMuon;
-			}
-			set
-			{
-				if ((this._NgayMuon != value))
-				{
-					this.OnNgayMuonChanging(value);
-					this.SendPropertyChanging();
-					this._NgayMuon = value;
-					this.SendPropertyChanged("NgayMuon");
-					this.OnNgayMuonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NgayTra", DbType="DateTime")]
-		public System.Nullable<System.DateTime> NgayTra
-		{
-			get
-			{
-				return this._NgayTra;
-			}
-			set
-			{
-				if ((this._NgayTra != value))
-				{
-					this.OnNgayTraChanging(value);
-					this.SendPropertyChanging();
-					this._NgayTra = value;
-					this.SendPropertyChanged("NgayTra");
-					this.OnNgayTraChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PhieuMuon_ChiTietMuon", Storage="_PhieuMuon", ThisKey="IDSach", OtherKey="IDPhieuMuon", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PhieuMuon_ChiTietMuon", Storage="_PhieuMuon", ThisKey="IDPhieuMuon", OtherKey="IDPhieuMuon", IsForeignKey=true)]
 		public PhieuMuon PhieuMuon
 		{
 			get
@@ -312,18 +264,18 @@ namespace DoAn_OOP
 					if ((value != null))
 					{
 						value.ChiTietMuons.Add(this);
-						this._IDSach = value.IDPhieuMuon;
+						this._IDPhieuMuon = value.IDPhieuMuon;
 					}
 					else
 					{
-						this._IDSach = default(string);
+						this._IDPhieuMuon = default(string);
 					}
 					this.SendPropertyChanged("PhieuMuon");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ThongTinSach_ChiTietMuon", Storage="_ThongTinSach", ThisKey="IDPhieuMuon", OtherKey="IDSach", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ThongTinSach_ChiTietMuon", Storage="_ThongTinSach", ThisKey="IDSach", OtherKey="IDSach", IsForeignKey=true)]
 		public ThongTinSach ThongTinSach
 		{
 			get
@@ -346,11 +298,11 @@ namespace DoAn_OOP
 					if ((value != null))
 					{
 						value.ChiTietMuons.Add(this);
-						this._IDPhieuMuon = value.IDSach;
+						this._IDSach = value.IDSach;
 					}
 					else
 					{
-						this._IDPhieuMuon = default(string);
+						this._IDSach = default(string);
 					}
 					this.SendPropertyChanged("ThongTinSach");
 				}
@@ -1217,6 +1169,8 @@ namespace DoAn_OOP
 		
 		private string _IDDocGia;
 		
+		private System.Nullable<System.DateTime> _NgayMuon;
+		
 		private System.Nullable<bool> _TinhTrang;
 		
 		private EntitySet<ChiTietMuon> _ChiTietMuons;
@@ -1231,6 +1185,8 @@ namespace DoAn_OOP
     partial void OnIDPhieuMuonChanged();
     partial void OnIDDocGiaChanging(string value);
     partial void OnIDDocGiaChanged();
+    partial void OnNgayMuonChanging(System.Nullable<System.DateTime> value);
+    partial void OnNgayMuonChanged();
     partial void OnTinhTrangChanging(System.Nullable<bool> value);
     partial void OnTinhTrangChanged();
     #endregion
@@ -1286,6 +1242,26 @@ namespace DoAn_OOP
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NgayMuon", DbType="Date")]
+		public System.Nullable<System.DateTime> NgayMuon
+		{
+			get
+			{
+				return this._NgayMuon;
+			}
+			set
+			{
+				if ((this._NgayMuon != value))
+				{
+					this.OnNgayMuonChanging(value);
+					this.SendPropertyChanging();
+					this._NgayMuon = value;
+					this.SendPropertyChanged("NgayMuon");
+					this.OnNgayMuonChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TinhTrang", DbType="Bit")]
 		public System.Nullable<bool> TinhTrang
 		{
@@ -1306,7 +1282,7 @@ namespace DoAn_OOP
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PhieuMuon_ChiTietMuon", Storage="_ChiTietMuons", ThisKey="IDPhieuMuon", OtherKey="IDSach")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PhieuMuon_ChiTietMuon", Storage="_ChiTietMuons", ThisKey="IDPhieuMuon", OtherKey="IDPhieuMuon")]
 		public EntitySet<ChiTietMuon> ChiTietMuons
 		{
 			get
@@ -1500,6 +1476,92 @@ namespace DoAn_OOP
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _ID;
+		
+		private string _Password;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(string value);
+    partial void OnIDChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    #endregion
+		
+		public User()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NChar(10)")]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ThongTinSach")]
 	public partial class ThongTinSach : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1518,7 +1580,7 @@ namespace DoAn_OOP
 		
 		private System.Nullable<System.DateTime> _NgayNhapKho;
 		
-		private System.Nullable<int> _Gia;
+		private System.Nullable<decimal> _Gia;
 		
 		private System.Nullable<int> _TonKe;
 		
@@ -1544,7 +1606,7 @@ namespace DoAn_OOP
     partial void OnNhaXuatBanChanged();
     partial void OnNgayNhapKhoChanging(System.Nullable<System.DateTime> value);
     partial void OnNgayNhapKhoChanged();
-    partial void OnGiaChanging(System.Nullable<int> value);
+    partial void OnGiaChanging(System.Nullable<decimal> value);
     partial void OnGiaChanged();
     partial void OnTonKeChanging(System.Nullable<int> value);
     partial void OnTonKeChanged();
@@ -1686,8 +1748,8 @@ namespace DoAn_OOP
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gia", DbType="Int")]
-		public System.Nullable<int> Gia
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gia", DbType="Money")]
+		public System.Nullable<decimal> Gia
 		{
 			get
 			{
@@ -1726,7 +1788,7 @@ namespace DoAn_OOP
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ThongTinSach_ChiTietMuon", Storage="_ChiTietMuons", ThisKey="IDSach", OtherKey="IDPhieuMuon")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ThongTinSach_ChiTietMuon", Storage="_ChiTietMuons", ThisKey="IDSach", OtherKey="IDSach")]
 		public EntitySet<ChiTietMuon> ChiTietMuons
 		{
 			get
@@ -1837,92 +1899,6 @@ namespace DoAn_OOP
 		{
 			this.SendPropertyChanging();
 			entity.ThongTinSach = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _ID;
-		
-		private string _Password;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(string value);
-    partial void OnIDChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    #endregion
-		
-		public User()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NChar(10)")]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }

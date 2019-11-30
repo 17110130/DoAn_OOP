@@ -102,6 +102,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QLThuvien1.dbml</DependentUpon>
     </Compile>
+    <Compile Include="ThamDinh.cs" />
     <EmbeddedResource Include="frmDocGia.resx">
       <DependentUpon>frmDocGia.cs</DependentUpon>
     </EmbeddedResource>

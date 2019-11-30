@@ -1,13 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLThuvien" Class="QLThuvien1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOPNEWBT\THANG;Initial Catalog=QLThuvien;Integrated Security=True" SettingsObjectName="DoAn_OOP.Properties.Settings" SettingsPropertyName="QLThuvienConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-EH88R88;Initial Catalog=QLThuvien;Integrated Security=True" SettingsObjectName="DoAn_OOP.Properties.Settings" SettingsPropertyName="QLThuvienConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.ChiTietMuon" Member="ChiTietMuons">
     <Type Name="ChiTietMuon">
       <Column Name="IDPhieuMuon" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="IDSach" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="NgayMuon" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="NgayTra" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="PhieuMuon_ChiTietMuon" Member="PhieuMuon" ThisKey="IDSach" OtherKey="IDPhieuMuon" Type="PhieuMuon" IsForeignKey="true" />
-      <Association Name="ThongTinSach_ChiTietMuon" Member="ThongTinSach" ThisKey="IDPhieuMuon" OtherKey="IDSach" Type="ThongTinSach" IsForeignKey="true" />
+      <Association Name="PhieuMuon_ChiTietMuon" Member="PhieuMuon" ThisKey="IDPhieuMuon" OtherKey="IDPhieuMuon" Type="PhieuMuon" IsForeignKey="true" />
+      <Association Name="ThongTinSach_ChiTietMuon" Member="ThongTinSach" ThisKey="IDSach" OtherKey="IDSach" Type="ThongTinSach" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.DocGia" Member="DocGias">
@@ -57,8 +55,9 @@
     <Type Name="PhieuMuon">
       <Column Name="IDPhieuMuon" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="IDDocGia" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NgayMuon" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="TinhTrang" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="PhieuMuon_ChiTietMuon" Member="ChiTietMuons" ThisKey="IDPhieuMuon" OtherKey="IDSach" Type="ChiTietMuon" />
+      <Association Name="PhieuMuon_ChiTietMuon" Member="ChiTietMuons" ThisKey="IDPhieuMuon" OtherKey="IDPhieuMuon" Type="ChiTietMuon" />
       <Association Name="DocGia_PhieuMuon" Member="DocGia" ThisKey="IDDocGia" OtherKey="IDDocGia" Type="DocGia" IsForeignKey="true" />
     </Type>
   </Table>
@@ -69,6 +68,12 @@
       <Association Name="TheLoai_ThongTinSach" Member="ThongTinSaches" ThisKey="IDTheloai" OtherKey="IDTheLoai" Type="ThongTinSach" />
     </Type>
   </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="ID" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.ThongTinSach" Member="ThongTinSaches">
     <Type Name="ThongTinSach">
       <Column Name="IDTheLoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
@@ -77,17 +82,11 @@
       <Column Name="TacGia" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="NhaXuatBan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="NgayNhapKho" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Gia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="TonKe" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="ThongTinSach_ChiTietMuon" Member="ChiTietMuons" ThisKey="IDSach" OtherKey="IDPhieuMuon" Type="ChiTietMuon" />
+      <Association Name="ThongTinSach_ChiTietMuon" Member="ChiTietMuons" ThisKey="IDSach" OtherKey="IDSach" Type="ChiTietMuon" />
       <Association Name="NhaXuatBan_ThongTinSach" Member="NhaXuatBan1" ThisKey="NhaXuatBan" OtherKey="IDNhaXuatBan" Type="NhaXuatBan" IsForeignKey="true" />
       <Association Name="TheLoai_ThongTinSach" Member="TheLoai" ThisKey="IDTheLoai" OtherKey="IDTheloai" Type="TheLoai" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.[User]" Member="Users">
-    <Type Name="User">
-      <Column Name="ID" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Password" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
