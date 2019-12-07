@@ -12,13 +12,13 @@ namespace DoAn_OOP
 {
     public partial class frmKhoSach : Form
     {
-        public frmKhoSach(string idsach)
+        public frmKhoSach()//string idsach)
         {
             InitializeComponent();
-            this.idsach = idsach;            
+           // this.idsach = idsach;            
         }
         QLThuvien1DataContext db = new QLThuvien1DataContext();
-        private string idsach;
+       // private string idsach;
         
         private void frmKhoSach_Load(object sender, EventArgs e)
         {
@@ -29,25 +29,28 @@ namespace DoAn_OOP
         }
         public void Load_datasach()
         {
-            dtgvKhoSach.DataSource = from s in db.ThongTinSaches select new { s.IDSach, s.IDTheLoai, s.TenSach,s.TacGia,s.NhaXuatBan,s.NgayNhapKho,s.Gia,s.TonKe};
+            dtgvKhoSach.DataSource = from s in db.ThongTinSaches select new { s.IDSach, s.IDTheLoai, s.TenSach,s.NhaXuatBan,s.NgayNhapKho,s.Gia,s.TonKho};
         }
         public void Load_cbbtheloai()
         {
             cbbTheLoai.DataSource = db.TheLoais.ToList();
             cbbTheLoai.DisplayMember = "TenTheLoai";
-            cbbTheLoai.ValueMember = "IDTheLoai";
+           // cbbTheLoai.ValueMember = "IDTheLoai";
             cbbTheLoai.SelectedIndex = -1;
         }
         public void Load_cbbnhaxb()
         {
             cbbNhaXuatBan.DataSource = db.NhaXuatBans.ToList();            
             cbbNhaXuatBan.DisplayMember = "TenNhaXuatBan";
-            cbbNhaXuatBan.ValueMember= "IDNhaXuatBan";
+            //cbbNhaXuatBan.ValueMember= "IDNhaXuatBan";
             cbbNhaXuatBan.SelectedIndex = -1;
         }
 
         private void dtgvKhoSach_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            btnSua.Enabled = true;
+            btnXoaThongTin.Enabled = true;
+
             DataGridViewRow row = new DataGridViewRow();
             row = dtgvKhoSach.Rows[e.RowIndex];
             try
@@ -55,11 +58,10 @@ namespace DoAn_OOP
                 cbbTheLoai.Text = row.Cells[1].Value.ToString();
                 txtMaSach.Text = row.Cells[0].Value.ToString();
                 txtTenSach.Text = row.Cells[2].Value.ToString();
-                txtTacGia.Text = row.Cells[3].Value.ToString();
-                cbbNhaXuatBan.Text = row.Cells[4].Value.ToString();
-                dtpNgayNhapKho.Text = row.Cells[5].Value.ToString();
-                txtGiaSach.Text = row.Cells[6].Value.ToString();
-                txtTonKho.Text = row.Cells[7].Value.ToString();
+                cbbNhaXuatBan.Text = row.Cells[3].Value.ToString();
+                dtpNgayNhapKho.Text = row.Cells[4].Value.ToString();
+                txtGiaSach.Text = row.Cells[5].Value.ToString();
+                txtTonKho.Text = row.Cells[6].Value.ToString();
 
             }
             catch (Exception) { }
@@ -68,51 +70,51 @@ namespace DoAn_OOP
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
+            Lam_moi();
+        }
+
+        public void Lam_moi()
+        {
             this.cbbTheLoai.Text = "";
             this.txtMaSach.Text = "";
             this.txtTenSach.Text = "";
-            this.txtTacGia.Text = "";
             this.cbbNhaXuatBan.Text = "";
             this.dtpNgayNhapKho.Text = "";
             this.txtGiaSach.Text = "";
             this.txtTonKho.Text = "";
 
         }
-        
+
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ThongTinSach sach = new ThongTinSach();
-            var id = db.ThongTinSaches.Count();
-            id++;
-            var mh = "MS";
-            if (id < 10) mh = mh + "000" + id;
-            else if (id < 100) mh = mh + "00" + id;
-            else if (id < 1000) mh = mh + "0" + id;
-            else mh = (mh + id).ToString();
-            var idsach = txtMaSach.Text.Substring(0, 0).ToUpper() + mh;
-
-            ////var idtl = (from s in db.TheLoais where (s.TenTheLoai == cbbTheLoai.SelectedValue.ToString()) select s.IDTheloai).ToList();
-
-            try
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
             {
-                sach.IDTheLoai = cbbTheLoai.SelectedValue.ToString();
-                sach.IDSach = idsach;
-                sach.TenSach = txtTenSach.Text;
-                sach.TacGia = txtTacGia.Text;
-                sach.NhaXuatBan = cbbNhaXuatBan.SelectedValue.ToString();
-                sach.NgayNhapKho = DateTime.Parse(dtpNgayNhapKho.Text);
-                sach.Gia = int.Parse(txtGiaSach.Text);
-                sach.TonKe = int.Parse(txtTonKho.Text);
-                db.ThongTinSaches.InsertOnSubmit(sach);
-                db.SubmitChanges();
-                Load_datasach();
-            }
+                try
+                {
+                    ThongTinSach sach = new ThongTinSach();
 
-            catch (Exception)
-            {
-                MessageBox.Show("Không thêm được!!","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Error);
- 
-            }
+                    var idtl = db.TheLoais.Where(p => p.TenTheLoai.Equals(cbbTheLoai.Text)).Select(x => x.IDTheLoai).Single();
+                    var idnxb = db.NhaXuatBans.Where(p => p.TenNhaXuatBan.Equals(cbbNhaXuatBan.Text)).Select(x => x.IDNhaXuatBan).Single();
+
+                    sach.IDTheLoai = idtl;
+                    sach.IDSach = txtMaSach.Text;
+                    sach.TenSach = txtTenSach.Text;
+                    sach.NhaXuatBan = idnxb;
+                    sach.NgayNhapKho = dtpNgayNhapKho.Value;
+                    sach.Gia = txtGiaSach.Text;
+                    sach.TonKho = int.Parse(txtTonKho.Text);
+
+                    db.ThongTinSaches.InsertOnSubmit(sach);
+                    db.SubmitChanges();
+
+                    Load_datasach();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Không thêm được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }             
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -124,50 +126,45 @@ namespace DoAn_OOP
                 sach = db.ThongTinSaches.Where(s => s.IDSach == txtMaSach.Text).Single();
                 sach.IDTheLoai = cbbTheLoai.Text;
                 sach.TenSach = txtTenSach.Text;
-                sach.TacGia = txtTacGia.Text;
-                sach.NhaXuatBan = cbbNhaXuatBan.SelectedValue.ToString();
-                sach.NgayNhapKho = DateTime.Parse(dtpNgayNhapKho.Text);
-                sach.Gia = int.Parse(txtGiaSach.Text);
-                sach.TonKe = int.Parse(txtTonKho.Text);
+                sach.NhaXuatBan = cbbNhaXuatBan.Text;
+                sach.NgayNhapKho = dtpNgayNhapKho.Value;
+                sach.Gia = txtGiaSach.Text;
+                sach.TonKho = int.Parse(txtTonKho.Text);
+
                 db.SubmitChanges();
                 Load_datasach();
+                Lam_moi();
             }
             catch(Exception)
             {
-                MessageBox.Show("Không sửa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-               
+                MessageBox.Show("Không sửa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);             
             }           
 
         }
 
         private void btnXoaThongTin_Click(object sender, EventArgs e)
         {
-            QLThuvien1DataContext db = new QLThuvien1DataContext();
-            ThongTinSach sach = new ThongTinSach();
-            try               
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
             {
-                sach = db.ThongTinSaches.Where(s => s.IDSach == txtMaSach.Text).Single();
-                sach.IDTheLoai = cbbTheLoai.Text;
-                sach.TenSach = txtTenSach.Text;
-                sach.TacGia = txtTacGia.Text;
-                sach.NhaXuatBan = cbbNhaXuatBan.SelectedValue.ToString();
-                sach.NgayNhapKho = DateTime.Parse(dtpNgayNhapKho.Text);
-                sach.Gia = int.Parse(txtGiaSach.Text);
-                sach.TonKe = int.Parse(txtTonKho.Text);
-                db.ThongTinSaches.DeleteOnSubmit(sach);
-                db.SubmitChanges();
-                Load_datasach();
-                this.cbbTheLoai.Text = "";
-                this.txtMaSach.Text = "";
-                this.txtTenSach.Text = "";
-                this.txtTacGia.Text = "";
-                this.cbbNhaXuatBan.Text = "";
-                this.dtpNgayNhapKho.Text = "";
-                this.txtGiaSach.Text = "";
-                this.txtTonKho.Text = "";
-            }
-            catch (Exception) { MessageBox.Show("Không xóa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                ThongTinSach sach = new ThongTinSach();
+                try
+                {
+                    sach = db.ThongTinSaches.Where(s => s.IDSach == txtMaSach.Text).Single();
+                    //sach.IDTheLoai = cbbTheLoai.Text;
+                    //sach.TenSach = txtTenSach.Text;
+                    //sach.NhaXuatBan = cbbNhaXuatBan.Text;
+                    //sach.NgayNhapKho = dtpNgayNhapKho.Value;
+                    //sach.Gia = txtGiaSach.Text;
+                    //sach.TonKho = int.Parse(txtTonKho.Text);
 
+                    db.ThongTinSaches.DeleteOnSubmit(sach);
+                    db.SubmitChanges();
+
+                    Load_datasach();
+                    Lam_moi();
+                }
+                catch (Exception) { MessageBox.Show("Không xóa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            }
         }
     }
 }

@@ -12,12 +12,10 @@ namespace DoAn_OOP
 {
     public partial class frmNhaXuatBan : Form
     {
-        public frmNhaXuatBan(string idnxb)
+        public frmNhaXuatBan()
         {
-            InitializeComponent();
-            this.idnxb = idnxb;
+            InitializeComponent();         
         }
-        private string idnxb;
         QLThuvien1DataContext db = new QLThuvien1DataContext();
         private void frmNhaXuatBan_Load(object sender, EventArgs e)
         {
@@ -25,11 +23,11 @@ namespace DoAn_OOP
             dtgvNhaXB.Columns["IDNhaXuatBan"].HeaderText = "Mã nhà xuất bản";
             dtgvNhaXB.Columns["TenNhaXuatBan"].HeaderText = "Tên nhà xuất bản";
             dtgvNhaXB.Columns["DiaChi"].HeaderText = "Địa chỉ";
-            dtgvNhaXB.Columns["SoDienThoai"].HeaderText = "Số điện thoại";
+            dtgvNhaXB.Columns["SDT"].HeaderText = "Số điện thoại";
             dtgvNhaXB.Columns["IDNhaXuatBan"].Width = 115;
             dtgvNhaXB.Columns["TenNhaXuatBan"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dtgvNhaXB.Columns["DiaChi"].Width = 80;
-            dtgvNhaXB.Columns["SoDienThoai"].Width = 100;
+            dtgvNhaXB.Columns["SDT"].Width = 100;
         }
         public void Load_data_NXB()
         {
@@ -39,12 +37,14 @@ namespace DoAn_OOP
                                        s.IDNhaXuatBan,
                                        s.TenNhaXuatBan,
                                        s.DiaChi,
-                                       s.SoDienThoai
+                                       s.SDT
                                    };
         }
 
         private void dtgvNhaXB_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            btnUpdatenxb.Enabled = true;
+            btnDeletenxb.Enabled = true;
             try
             {
                 DataGridViewRow row = new DataGridViewRow();
@@ -55,101 +55,135 @@ namespace DoAn_OOP
                 txtSdt.Text = row.Cells[3].Value.ToString();
 
             }
-            catch (Exception) { }
-           
+            catch (Exception) { }         
         }
 
         private void btnAddNXB_Click(object sender, EventArgs e)
         {
-            var id = db.NhaXuatBans.Count();
-            id++;
-            var mh = "NXB";
-            if (id < 10) mh = mh + "000" + id;
-            else if (id < 100) mh = mh + "00" + id;
-            else if (id < 1000) mh = mh + "0" + id;
-            else mh = (mh + id).ToString();
-            var idnxb = txtMaNXB.Text.Substring(0, 0).ToUpper() + mh;
-            NhaXuatBan nxb = new NhaXuatBan();            
-            try
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
             {
-                nxb.IDNhaXuatBan =idnxb;
-                nxb.TenNhaXuatBan = txtTenNXB.Text;
-                nxb.DiaChi = txtDiaChi.Text;
-                nxb.SoDienThoai = txtSdt.Text;
-                db.NhaXuatBans.InsertOnSubmit(nxb);
-                db.SubmitChanges();
-                Load_data_NXB();
-            }
-            catch (Exception ex) { MessageBox.Show("Không thêm được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                try
+                {
+                    string n = "";
+                    ThamDinh td = new ThamDinh();
 
+                    n += td.kiemTra_Rong("Mã nhà xuất bản", txtMaNXB);
+                    n += td.kiemTra_Rong("Tên nhà xuất bản", txtTenNXB);
+                    
+                    if ( n != "" )
+                    {
+                        MessageBox.Show(n);
+                        return;
+                    }
+
+                    var idnxb = txtMaNXB.Text;
+                    var t = db.NhaXuatBans.Where(p => p.IDNhaXuatBan.Equals(idnxb)).Select(z => z.IDNhaXuatBan).SingleOrDefault();
+
+                    if ( t == idnxb )
+                    {
+                        MessageBox.Show("Mã nhà xuất bản đã tồn tại!");
+                        txtMaNXB.Text = "";
+                        return;
+                    }
+
+                    NhaXuatBan nxb = new NhaXuatBan();
+
+                    nxb.IDNhaXuatBan = txtMaNXB.Text;
+                    nxb.TenNhaXuatBan = txtTenNXB.Text;
+                    nxb.DiaChi = txtDiaChi.Text;
+                    nxb.SDT = txtSdt.Text;
+
+                    db.NhaXuatBans.InsertOnSubmit(nxb);
+                    db.SubmitChanges();
+
+                    Load_data_NXB();
+                    Lam_moi();
+                   
+                }
+                catch (Exception ex) { MessageBox.Show("Không thêm được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            }
+        }
+
+        public void Lam_moi()
+        {
+            txtMaNXB.Text = "";
+            txtTenNXB.Text = "";
+            txtDiaChi.Text = "";
+            txtSdt.Text = "";
         }
 
         private void btnClearnxb_Click(object sender, EventArgs e)
         {
-            this.txtMaNXB.Clear();
-            this.txtTenNXB.Clear();
-            this.txtDiaChi.Clear();
-            this.txtSdt.Clear();
+            Lam_moi();
         }
 
         private void btnUpdatenxb_Click(object sender, EventArgs e)
         {
-            QLThuvien1DataContext db = new QLThuvien1DataContext();
-            NhaXuatBan nxb = new NhaXuatBan();
-            try
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
             {
-                nxb = db.NhaXuatBans.Where(s => s.IDNhaXuatBan == txtMaNXB.Text).Single();
-                nxb.TenNhaXuatBan = txtTenNXB.Text;
-                nxb.DiaChi = txtDiaChi.Text;
-                nxb.SoDienThoai = txtSdt.Text;
-                db.SubmitChanges();
-                Load_data_NXB();
-            }
-            catch(Exception)
-            {
-                MessageBox.Show("Không sửa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                try
+                {
+                    NhaXuatBan nxb = db.NhaXuatBans.Where(p => p.IDNhaXuatBan.Equals(txtMaNXB.Text)).Single();
 
+                    nxb.TenNhaXuatBan = txtTenNXB.Text;
+                    nxb.DiaChi = txtDiaChi.Text;
+                    nxb.SDT = txtSdt.Text;
+
+                    db.SubmitChanges();
+                    Load_data_NXB();
+
+                    Lam_moi();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Không sửa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void btnDeletenxb_Click(object sender, EventArgs e)
         {
-            QLThuvien1DataContext db = new QLThuvien1DataContext();
-            NhaXuatBan nxb = new NhaXuatBan();
-            var id = from s in db.ThongTinSaches where (s.NhaXuatBan == txtMaNXB.Text) select s;
-            var dem = id.Count();
-            if (dem==0)
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
             {
-                try
+                var ts = db.ThongTinSaches.Where(x => x.NhaXuatBan.Equals(txtMaNXB.Text)).Select(t => t);
+
+                if ( ts.Count() == 0 )
                 {
-                    nxb = db.NhaXuatBans.Where(s => s.IDNhaXuatBan == txtMaNXB.Text).Single();
-                    nxb.TenNhaXuatBan = txtTenNXB.Text;
-                    nxb.DiaChi = txtDiaChi.Text;
-                    nxb.SoDienThoai = txtSdt.Text;
-                    db.NhaXuatBans.DeleteOnSubmit(nxb);
-                    db.SubmitChanges();
-                    Load_data_NXB();
-                    this.txtMaNXB.Clear();
-                    this.txtTenNXB.Clear();
-                    this.txtDiaChi.Clear();
-                    this.txtSdt.Clear();
+                    try
+                    {
+                        NhaXuatBan de = db.NhaXuatBans.Where(p => p.IDNhaXuatBan.Equals(txtMaNXB.Text)).SingleOrDefault();
+
+                        db.NhaXuatBans.DeleteOnSubmit(de);
+                        db.SubmitChanges();
+
+                        Load_data_NXB();
+                        Lam_moi();
+
+                    }
+                    catch(Exception)
+                    {
+                        MessageBox.Show("Không xóa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch (Exception)
+                else
                 {
-                    MessageBox.Show("Không xóa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Không xóa được vì mã nhà xuất bản còn sài bên bảng thông tin sách!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
+                    MessageBox.Show("Không thể xóa vì bảng thông tin sách đang sử dụng nhà xuất bản này!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }                
+            }                     
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void txtTimKiemNXB_TextChanged(object sender, EventArgs e)
         {
-            var list = (from s in db.NhaXuatBans where s.TenNhaXuatBan.Contains(txtTenNXB.Text) select s).ToList();
-            dtgvNhaXB.DataSource = list;
+            dtgvNhaXB.DataSource = from s in db.NhaXuatBans
+                                   where s.IDNhaXuatBan == txtTimKiemNXB.Text
+                                   select new
+                                   {
+                                       s.IDNhaXuatBan,
+                                       s.TenNhaXuatBan,
+                                       s.DiaChi,
+                                       s.SDT
+                                   };
+
         }
     }
 }

@@ -12,126 +12,169 @@ namespace DoAn_OOP
 {
     public partial class frmTheLoai : Form
     {
-        QLThuvien1DataContext db = new QLThuvien1DataContext();
-        
-        public frmTheLoai(string idtl)
+        public frmTheLoai()
         {
             InitializeComponent();
-            this.idtl = idtl;
         }
-        private string idtl;
+
         private void frmTheLoai_Load(object sender, EventArgs e)
         {
-            Load_datatl();
-            dtgvTheLoai.Columns["IDTheLoai"].HeaderText="Mã thể loại";
-            dtgvTheLoai.Columns["TenTheLoai"].HeaderText = "Tên thể loại";
-            dtgvTheLoai.Columns["IDTheLoai"].Width = 100;
-            dtgvTheLoai.Columns["TenTheLoai"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-        }
-        public void Load_datatl()
-        {
-            dtgvTheLoai.DataSource = from s in db.TheLoais select new { s.IDTheloai, s.TenTheLoai };
+            Load_data();
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
+        public void Load_data()
         {
-            this.txtID.Clear();
-            this.txtTenTL.Clear();
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            QLThuvien1DataContext db = new QLThuvien1DataContext();
-            TheLoai tl = new TheLoai();
-            var id = db.TheLoais.Count();
-            id++;
-            var mh = "TL";
-            if (id < 10) mh = mh + "000" + id;
-            else if (id < 100) mh = mh + "00" + id;
-            else if (id < 1000) mh = mh + "0" + id;
-            else mh = (mh + id).ToString();
-            var idtl = txtID.Text.Substring(0, 0).ToUpper() + mh;
-            try
-            {
-                tl.IDTheloai = idtl;
-                tl.TenTheLoai = txtTenTL.Text;
-                db.TheLoais.InsertOnSubmit(tl);
-                db.SubmitChanges();
-                Load_datatl();
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
+            {              
+                dtgvTheLoai.DataSource = from s in db.TheLoais
+                                         select new
+                                         {
+                                             MaTheLoai = s.IDTheLoai,
+                                             TenTheLoai = s.TenTheLoai
+                                         };
             }
-            catch(Exception)
-            {
-                MessageBox.Show("Không thêm được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            QLThuvien1DataContext db = new QLThuvien1DataContext();
-            TheLoai tl = new TheLoai();
-            try
-            {
-                tl = db.TheLoais.Where(s => s.IDTheloai == txtID.Text).Single();
-                tl.TenTheLoai = txtTenTL.Text;
-                db.SubmitChanges();
-                Load_datatl();
-            }
-            catch(Exception)
-            {
-                MessageBox.Show("Không sửa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            QLThuvien1DataContext db = new QLThuvien1DataContext();
-            TheLoai tl = new TheLoai();
-            ThongTinSach sach = new ThongTinSach();
-            var id = from t in db.ThongTinSaches where(t.IDSach==txtID.Text)  select t.IDSach;
-            var dem=id.Count();
-            if(dem==0)
-            {
-                try
-                {
-                    tl = db.TheLoais.Where(s => s.IDTheloai == txtID.Text).Single();
-                    tl.TenTheLoai = txtTenTL.Text;
-                    db.TheLoais.DeleteOnSubmit(tl);
-                    db.SubmitChanges();
-                    Load_datatl();
-                    this.txtID.Clear();
-                    this.txtTenTL.Clear();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Không xóa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Không xóa được vì thể loại này vẫn được sử bên thông tin sách!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }            
         }
 
         private void dtgvTheLoai_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = new DataGridViewRow();
-            row = dtgvTheLoai.Rows[e.RowIndex];
+            btnSua.Enabled = true;
+            btnXoa.Enabled = true;
             try
             {
-                txtID.Text = row.Cells[0].Value.ToString();
-                txtTenTL.Text = row.Cells[1].Value.ToString();
+                DataGridViewRow row = new DataGridViewRow();
+                row = dtgvTheLoai.Rows[e.RowIndex];
+                txtMaTL.Text = row.Cells[0].Value.ToString();
+                txtTenTL.Text = row.Cells[1].Value.ToString();               
             }
-            catch(Exception)
+            catch (Exception) { }
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            Lam_moi();
+        }
+
+        public void Lam_moi()
+        {
+            txtMaTL.Text = "";
+            txtTenTL.Text = "";
+        }
+
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
             {
-                MessageBox.Show("Không load được dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                try
+                {
+                    string n = "";
+                    ThamDinh td = new ThamDinh();
+                    n += td.kiemTra_Rong("Mã thể loại", txtMaTL);
+                    n += td.kiemTra_Rong("Tên thể loại", txtTenTL);
+
+                    if ( n != "" )
+                    {
+                        MessageBox.Show(n);
+                        return;
+                    }
+
+                    var t = db.TheLoais.Where(p => p.IDTheLoai.Equals(txtMaTL.Text)).Select(z => z.IDTheLoai).SingleOrDefault();
+
+                    if ( t == txtMaTL.Text )
+                    {
+                        MessageBox.Show("Mã thể loại đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMaTL.Text = "";
+                        return;
+                    }
+
+                    TheLoai tl = new TheLoai();
+
+                    tl.IDTheLoai = txtMaTL.Text;
+                    tl.TenTheLoai = txtTenTL.Text;
+
+                    db.TheLoais.InsertOnSubmit(tl);
+                    db.SubmitChanges();
+
+                    Load_data();
+                    Lam_moi();
+                }
+                catch(Exception)
+                {
+                    MessageBox.Show("Không thêm được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
-        private void txtTimkiem_TextChanged(object sender, EventArgs e)
+        private void btnSua_Click(object sender, EventArgs e)
         {
-            var list = (from s in db.TheLoais where s.TenTheLoai.Contains(txtTimkiem.Text) select s).ToList();
-            dtgvTheLoai.DataSource = list;
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
+            {
+                try
+                {
+                    var t = db.TheLoais.Where(p => p.IDTheLoai.Equals(txtMaTL.Text)).Single();
+
+                    t.TenTheLoai = txtTenTL.Text;
+
+                    db.SubmitChanges();
+                    Load_data();
+                    Lam_moi();
+                }
+                catch(Exception)
+                {
+                    MessageBox.Show("Không sửa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
+            {
+                var tl = db.ThongTinSaches.Where(x => x.NhaXuatBan.Equals(txtMaTL.Text)).Select(t => t);
+
+                if (tl.Count() == 0)
+                {
+                    try
+                    {
+                        TheLoai de = db.TheLoais.Where(p => p.IDTheLoai.Equals(txtMaTL.Text)).SingleOrDefault();
+
+                        db.TheLoais.DeleteOnSubmit(de);
+                        db.SubmitChanges();
+
+                        Load_data();
+                        Lam_moi();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Không xóa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Không thể xóa vì trong thể loại này còn chứa sách!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void txtTImKiem_TextChanged(object sender, EventArgs e)
+        {
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
+            {
+                if (txtTImKiem.Text == "")
+                {
+                    Load_data();
+                }
+                else
+                {
+                    dtgvTheLoai.DataSource = from s in db.TheLoais
+                                             where s.IDTheLoai==txtTImKiem.Text
+                                             select new
+                                             {
+                                                 MaTheLoai = s.IDTheLoai,
+                                                 TenTheLoai = s.TenTheLoai
+                                             };
+                }
+            }
+               
         }
     }
 }

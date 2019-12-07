@@ -17,7 +17,7 @@ namespace DoAn_OOP
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmQuanLyMuon());
+            Application.Run(new frmFormMain());
         }
     }
 }
