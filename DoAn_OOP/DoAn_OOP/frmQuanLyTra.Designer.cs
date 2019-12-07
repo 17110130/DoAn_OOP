@@ -40,6 +40,8 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnXong = new System.Windows.Forms.Button();
+            this.cbMaDG = new System.Windows.Forms.ComboBox();
             this.dtpNgSinh = new System.Windows.Forms.DateTimePicker();
             this.radNu = new System.Windows.Forms.RadioButton();
             this.radNam = new System.Windows.Forms.RadioButton();
@@ -54,8 +56,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lblTongTien = new System.Windows.Forms.Label();
-            this.cbMaDG = new System.Windows.Forms.ComboBox();
-            this.btnXong = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -205,6 +205,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin độc giả:";
             // 
+            // btnXong
+            // 
+            this.btnXong.Location = new System.Drawing.Point(238, 205);
+            this.btnXong.Name = "btnXong";
+            this.btnXong.Size = new System.Drawing.Size(89, 43);
+            this.btnXong.TabIndex = 5;
+            this.btnXong.Text = "Xong";
+            this.btnXong.UseVisualStyleBackColor = true;
+            this.btnXong.Click += new System.EventHandler(this.btnXong_Click);
+            // 
+            // cbMaDG
+            // 
+            this.cbMaDG.FormattingEnabled = true;
+            this.cbMaDG.Location = new System.Drawing.Point(97, 17);
+            this.cbMaDG.Name = "cbMaDG";
+            this.cbMaDG.Size = new System.Drawing.Size(230, 23);
+            this.cbMaDG.TabIndex = 4;
+            this.cbMaDG.SelectedIndexChanged += new System.EventHandler(this.cbMaDG_SelectedIndexChanged);
+            // 
             // dtpNgSinh
             // 
             this.dtpNgSinh.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -342,25 +361,6 @@
             this.lblTongTien.Size = new System.Drawing.Size(593, 39);
             this.lblTongTien.TabIndex = 0;
             // 
-            // cbMaDG
-            // 
-            this.cbMaDG.FormattingEnabled = true;
-            this.cbMaDG.Location = new System.Drawing.Point(97, 17);
-            this.cbMaDG.Name = "cbMaDG";
-            this.cbMaDG.Size = new System.Drawing.Size(230, 23);
-            this.cbMaDG.TabIndex = 4;
-            this.cbMaDG.SelectedIndexChanged += new System.EventHandler(this.cbMaDG_SelectedIndexChanged);
-            // 
-            // btnXong
-            // 
-            this.btnXong.Location = new System.Drawing.Point(238, 205);
-            this.btnXong.Name = "btnXong";
-            this.btnXong.Size = new System.Drawing.Size(89, 43);
-            this.btnXong.TabIndex = 5;
-            this.btnXong.Text = "Xong";
-            this.btnXong.UseVisualStyleBackColor = true;
-            this.btnXong.Click += new System.EventHandler(this.btnXong_Click);
-            // 
             // frmQuanLyTra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -399,7 +399,6 @@
         private System.Windows.Forms.RadioButton radNam;
         private System.Windows.Forms.Label lblSDT;
         private System.Windows.Forms.Label lblDiaChi;
-        private System.Windows.Forms.Label lblHoTen;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DateTimePicker dtpNgMuon;
@@ -415,5 +414,6 @@
         private System.Windows.Forms.Label lblTongTien;
         private System.Windows.Forms.ComboBox cbMaDG;
         private System.Windows.Forms.Button btnXong;
+        public System.Windows.Forms.Label lblHoTen;
     }
 }

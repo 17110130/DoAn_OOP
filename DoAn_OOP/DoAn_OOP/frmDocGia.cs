@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -161,7 +162,8 @@ namespace DoAn_OOP
 
         private void dtgvDocGia_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnSua.Enabled = true;        
+            btnSua.Enabled = true;
+            btnXuatFileTxt.Enabled = true;
 
             DataGridViewRow row = new DataGridViewRow();
             row = dtgvDocGia.Rows[e.RowIndex];
@@ -179,6 +181,36 @@ namespace DoAn_OOP
                 txtSDT.Text= row.Cells[5].Value.ToString();               
             }
             catch (Exception) { }
+        }
+
+        private void btnXuatFileTxt_Click(object sender, EventArgs e)
+        {
+            //Console.OutputEncoding = Encoding.UTF8;
+
+            FileStream fw = null;
+            string msg = "";
+            byte[] msgByte = null;
+
+            fw = new FileStream("Bill.txt", FileMode.Create);
+
+            msgByte = Encoding.Default.GetBytes(msg);
+            fw.Write(msgByte, 0, msgByte.Length);
+            msg = "";
+
+            var gt = radNam.Checked==true?"Nam" : "Nữ";
+            msg += "Mã độc giả: " + txtMaDocGia.Text + "\r\n"
+                + "Họ tên: " + txtHoTen.Text + "\r\n"
+                + "Giới tính: " + gt + "\r\n"
+                + "Ngày sinh: " + dtpNgaySinh.Text + "\r\n"
+                + "Địa chỉ: " + txtDiaChi.Text + "\r\n"
+                + "SĐT: " + txtSDT.Text + "\r\n";
+
+            msgByte = Encoding.Default.GetBytes(msg);
+            fw.Write(msgByte, 0, msgByte.Length);
+
+            if (fw != null) fw.Close();
+
+            MessageBox.Show("The file Bill.txt have created!");
         }
     }
 }

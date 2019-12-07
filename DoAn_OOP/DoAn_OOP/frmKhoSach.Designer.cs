@@ -48,6 +48,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dtgvKhoSach = new System.Windows.Forms.DataGridView();
+            this.btnXuatFileExcel = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvKhoSach)).BeginInit();
             this.SuspendLayout();
@@ -271,15 +272,29 @@
             this.dtgvKhoSach.Name = "dtgvKhoSach";
             this.dtgvKhoSach.RowHeadersWidth = 51;
             this.dtgvKhoSach.RowTemplate.Height = 24;
-            this.dtgvKhoSach.Size = new System.Drawing.Size(902, 327);
+            this.dtgvKhoSach.Size = new System.Drawing.Size(902, 253);
             this.dtgvKhoSach.TabIndex = 1;
             this.dtgvKhoSach.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvKhoSach_CellClick);
+            // 
+            // btnXuatFileExcel
+            // 
+            this.btnXuatFileExcel.BackColor = System.Drawing.Color.LawnGreen;
+            this.btnXuatFileExcel.Enabled = false;
+            this.btnXuatFileExcel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXuatFileExcel.Location = new System.Drawing.Point(704, 549);
+            this.btnXuatFileExcel.Name = "btnXuatFileExcel";
+            this.btnXuatFileExcel.Size = new System.Drawing.Size(126, 61);
+            this.btnXuatFileExcel.TabIndex = 4;
+            this.btnXuatFileExcel.Text = "Xuất File Excel";
+            this.btnXuatFileExcel.UseVisualStyleBackColor = false;
+            this.btnXuatFileExcel.Click += new System.EventHandler(this.btnXuatFileExcel_Click);
             // 
             // frmKhoSach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 613);
+            this.Controls.Add(this.btnXuatFileExcel);
             this.Controls.Add(this.dtgvKhoSach);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -316,5 +331,6 @@
         private System.Windows.Forms.ComboBox cbbNhaXuatBan;
         private System.Windows.Forms.DataGridView dtgvKhoSach;
         public System.Windows.Forms.ComboBox cbbTheLoai;
+        private System.Windows.Forms.Button btnXuatFileExcel;
     }
 }

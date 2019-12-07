@@ -50,6 +50,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dtgvDocGia = new System.Windows.Forms.DataGridView();
+            this.btnXuatFileTxt = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvDocGia)).BeginInit();
@@ -107,6 +108,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnXuatFileTxt);
             this.groupBox1.Controls.Add(this.dtpNgaySinh);
             this.groupBox1.Controls.Add(this.radNu);
             this.groupBox1.Controls.Add(this.btnSua);
@@ -282,6 +284,17 @@
             this.dtgvDocGia.TabIndex = 8;
             this.dtgvDocGia.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvDocGia_CellClick);
             // 
+            // btnXuatFileTxt
+            // 
+            this.btnXuatFileTxt.Enabled = false;
+            this.btnXuatFileTxt.Location = new System.Drawing.Point(397, 147);
+            this.btnXuatFileTxt.Name = "btnXuatFileTxt";
+            this.btnXuatFileTxt.Size = new System.Drawing.Size(73, 57);
+            this.btnXuatFileTxt.TabIndex = 7;
+            this.btnXuatFileTxt.Text = "Xuất File Txt";
+            this.btnXuatFileTxt.UseVisualStyleBackColor = true;
+            this.btnXuatFileTxt.Click += new System.EventHandler(this.btnXuatFileTxt_Click);
+            // 
             // frmDocGia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -328,5 +341,6 @@
         private System.Windows.Forms.DataGridView dtgvDocGia;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnLamMoi;
+        private System.Windows.Forms.Button btnXuatFileTxt;
     }
 }

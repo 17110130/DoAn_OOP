@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnKetThuc = new System.Windows.Forms.Button();
             this.btnTra = new System.Windows.Forms.Button();
             this.cbMaDG = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -48,7 +49,6 @@
             this.dtgvTheLoaiTimKiem = new System.Windows.Forms.DataGridView();
             this.txtTimKiemTheLoai = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnKetThuc = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvSachDaChon)).BeginInit();
@@ -78,6 +78,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin:";
+            // 
+            // btnKetThuc
+            // 
+            this.btnKetThuc.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnKetThuc.Location = new System.Drawing.Point(315, 163);
+            this.btnKetThuc.Name = "btnKetThuc";
+            this.btnKetThuc.Size = new System.Drawing.Size(89, 42);
+            this.btnKetThuc.TabIndex = 18;
+            this.btnKetThuc.Text = "Kết thúc";
+            this.btnKetThuc.UseVisualStyleBackColor = true;
+            this.btnKetThuc.Click += new System.EventHandler(this.btnKetThuc_Click);
             // 
             // btnTra
             // 
@@ -267,17 +278,6 @@
             this.label5.Size = new System.Drawing.Size(107, 15);
             this.label5.TabIndex = 0;
             this.label5.Text = "Tìm kiếm thể loại:";
-            // 
-            // btnKetThuc
-            // 
-            this.btnKetThuc.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKetThuc.Location = new System.Drawing.Point(315, 163);
-            this.btnKetThuc.Name = "btnKetThuc";
-            this.btnKetThuc.Size = new System.Drawing.Size(89, 42);
-            this.btnKetThuc.TabIndex = 18;
-            this.btnKetThuc.Text = "Kết thúc";
-            this.btnKetThuc.UseVisualStyleBackColor = true;
-            this.btnKetThuc.Click += new System.EventHandler(this.btnKetThuc_Click);
             // 
             // frmQuanLyMuon
             // 
