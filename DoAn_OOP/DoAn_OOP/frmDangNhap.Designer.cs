@@ -57,6 +57,7 @@
             this.btnDangNhap.TabIndex = 8;
             this.btnDangNhap.Text = "Đăng Nhập";
             this.btnDangNhap.UseVisualStyleBackColor = false;
+            this.btnDangNhap.Click += new System.EventHandler(this.btnDangNhap_Click_1);
             // 
             // txtTaiKhoan
             // 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.25" name="QLThuvien1">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.75" name="QLThuvien1">
   <DataContextMoniker Name="/QLThuvien1DataContext" />
   <nestedChildShapes>
     <classShape Id="3c43f6e2-7506-4deb-9502-1cc562f2d160" absoluteBounds="6.25, 5.125, 2, 1.7708968098958327">
@@ -73,10 +73,10 @@
         <classShapeMoniker Id="0a1aeb6e-8c0a-4b17-ae39-9456d27a8692" />
       </nodes>
     </associationConnector>
-    <classShape Id="dcc35996-0d3b-458e-8777-7dde3a6441d3" absoluteBounds="5, 7.625, 2, 1.3862939453125">
+    <classShape Id="60562d72-a7f0-4478-864e-f4263ba15b51" absoluteBounds="3.375, 8.125, 2, 1.3862939453125">
       <DataClassMoniker Name="/QLThuvien1DataContext/TaiKhoan" />
       <nestedChildShapes>
-        <elementListCompartment Id="37be64c3-00ea-4ea7-924f-6dddd2f746fe" absoluteBounds="5.015, 8.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="fecc3110-933b-491e-b34d-a80f0078a3b8" absoluteBounds="3.39, 8.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

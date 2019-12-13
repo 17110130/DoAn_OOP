@@ -34,6 +34,11 @@
             this.btnQuanLyMuon = new System.Windows.Forms.Button();
             this.btnTheLoai = new System.Windows.Forms.Button();
             this.btnNhaXuatBan = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.quảnLýTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.danhSáchTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tạoTàiKhoảnMớiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnQuanLyKhoSach
@@ -110,6 +115,39 @@
             this.btnNhaXuatBan.UseVisualStyleBackColor = false;
             this.btnNhaXuatBan.Click += new System.EventHandler(this.btnNhaXuatBan_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.quảnLýTàiKhoảnToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(894, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // quảnLýTàiKhoảnToolStripMenuItem
+            // 
+            this.quảnLýTàiKhoảnToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.danhSáchTàiKhoảnToolStripMenuItem,
+            this.tạoTàiKhoảnMớiToolStripMenuItem});
+            this.quảnLýTàiKhoảnToolStripMenuItem.Name = "quảnLýTàiKhoảnToolStripMenuItem";
+            this.quảnLýTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(112, 20);
+            this.quảnLýTàiKhoảnToolStripMenuItem.Text = "Quản lý tài khoản";
+            // 
+            // danhSáchTàiKhoảnToolStripMenuItem
+            // 
+            this.danhSáchTàiKhoảnToolStripMenuItem.Name = "danhSáchTàiKhoảnToolStripMenuItem";
+            this.danhSáchTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.danhSáchTàiKhoảnToolStripMenuItem.Text = "Danh sách tài khoản";
+            this.danhSáchTàiKhoảnToolStripMenuItem.Click += new System.EventHandler(this.danhSáchTàiKhoảnToolStripMenuItem_Click);
+            // 
+            // tạoTàiKhoảnMớiToolStripMenuItem
+            // 
+            this.tạoTàiKhoảnMớiToolStripMenuItem.Name = "tạoTàiKhoảnMớiToolStripMenuItem";
+            this.tạoTàiKhoảnMớiToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.tạoTàiKhoảnMớiToolStripMenuItem.Text = "Tạo tài khoản mới";
+            this.tạoTàiKhoảnMớiToolStripMenuItem.Click += new System.EventHandler(this.tạoTàiKhoảnMớiToolStripMenuItem_Click);
+            // 
             // frmFormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -124,10 +162,15 @@
             this.Controls.Add(this.btnTheLoai);
             this.Controls.Add(this.btnDocGia);
             this.Controls.Add(this.btnQuanLyKhoSach);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmFormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Phần mềm quản lý thư viện";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -139,6 +182,10 @@
         private System.Windows.Forms.Button btnQuanLyMuon;
         private System.Windows.Forms.Button btnTheLoai;
         private System.Windows.Forms.Button btnNhaXuatBan;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem quảnLýTàiKhoảnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem danhSáchTàiKhoảnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tạoTàiKhoảnMớiToolStripMenuItem;
     }
 }
 

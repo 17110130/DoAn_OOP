@@ -56,5 +56,12 @@ namespace DoAn_OOP
                 return "Hãy chọn giới tính!\n";
             return "";
         }
+
+        public string Check_PhanQuyen(RadioButton r1,RadioButton r2,RadioButton r3)
+        {
+            if (r1.Checked == false && r2.Checked == false && r3.Checked == false)
+                return "Hãy chọn phân quyền!\n";
+            return "";
+        }
     }
 }

@@ -20,6 +20,8 @@ namespace DoAn_OOP
             {
                 btnNhaXuatBan.Enabled = false;
                 btnTheLoai.Enabled = false;
+                quảnLýTàiKhoảnToolStripMenuItem.Enabled = false;
+                
             }
             if ( frmDangNhap.PQ == "3" )
             {
@@ -28,8 +30,10 @@ namespace DoAn_OOP
                 btnQuanLyMuon.Enabled = false;
                 btnQuanLyTra.Enabled = false;
                 btnTheLoai.Enabled = false;
+                quảnLýTàiKhoảnToolStripMenuItem.Enabled = false;
+
             }
-           
+
         }
 
         private void btnQuanLyKhoSach_Click(object sender, EventArgs e)
@@ -70,6 +74,19 @@ namespace DoAn_OOP
         {
             frmNhaXuatBan nxb = new frmNhaXuatBan();
             nxb.ShowDialog();
+        }
+
+        private void tạoTàiKhoảnMớiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDangKi dk = new frmDangKi();
+
+            dk.ShowDialog();
+        }
+
+        private void danhSáchTàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDanhSachTaiKhoan ds = new frmDanhSachTaiKhoan();
+            ds.ShowDialog();
         }
     }
 }

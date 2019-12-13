@@ -147,27 +147,28 @@ namespace DoAn_OOP
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            QLThuvien1DataContext db = new QLThuvien1DataContext();
-            ThongTinSach sach = new ThongTinSach();
-            try
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
             {
-                sach = db.ThongTinSaches.Where(s => s.IDSach == txtMaSach.Text).Single();
-                sach.IDTheLoai = cbbTheLoai.Text;
-                sach.TenSach = txtTenSach.Text;
-                sach.NhaXuatBan = cbbNhaXuatBan.Text;
-                sach.NgayNhapKho = dtpNgayNhapKho.Value;
-                sach.Gia = txtGiaSach.Text;
-                sach.TonKho = int.Parse(txtTonKho.Text);
+                ThongTinSach sach = new ThongTinSach();
+                try
+                {
+                    sach = db.ThongTinSaches.Where(s => s.IDSach == txtMaSach.Text).Single();
+                    sach.IDTheLoai = cbbTheLoai.Text;
+                    sach.TenSach = txtTenSach.Text;
+                    sach.NhaXuatBan = cbbNhaXuatBan.Text;
+                    sach.NgayNhapKho = dtpNgayNhapKho.Value;
+                    sach.Gia = txtGiaSach.Text;
+                    sach.TonKho = int.Parse(txtTonKho.Text);
 
-                db.SubmitChanges();
-                Load_datasach();
-                Lam_moi();
+                    db.SubmitChanges();
+                    Load_datasach();
+                    Lam_moi();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Không sửa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            catch(Exception)
-            {
-                MessageBox.Show("Không sửa được!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);             
-            }           
-
         }
 
         private void btnXoaThongTin_Click(object sender, EventArgs e)
@@ -178,12 +179,7 @@ namespace DoAn_OOP
                 try
                 {
                     sach = db.ThongTinSaches.Where(s => s.IDSach == txtMaSach.Text).Single();
-                    //sach.IDTheLoai = cbbTheLoai.Text;
-                    //sach.TenSach = txtTenSach.Text;
-                    //sach.NhaXuatBan = cbbNhaXuatBan.Text;
-                    //sach.NgayNhapKho = dtpNgayNhapKho.Value;
-                    //sach.Gia = txtGiaSach.Text;
-                    //sach.TonKho = int.Parse(txtTonKho.Text);
+                    
 
                     db.ThongTinSaches.DeleteOnSubmit(sach);
                     db.SubmitChanges();

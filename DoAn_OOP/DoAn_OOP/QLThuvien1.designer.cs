@@ -1482,7 +1482,7 @@ namespace DoAn_OOP
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MatKhau", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MatKhau", DbType="NVarChar(500) NOT NULL", CanBeNull=false)]
 		public string MatKhau
 		{
 			get
