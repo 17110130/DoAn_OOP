@@ -20,6 +20,22 @@ namespace DoAn_OOP
         private void frmTheLoai_Load(object sender, EventArgs e)
         {
             Load_data();
+
+            if ( frmDangNhap.PQ == "2" )
+            {
+                btnThem.Enabled = false;
+                btnXoa.Enabled = false;
+            }
+            else
+            {
+                if ( frmDangNhap.PQ == "3" )
+                {
+                    btnThem.Enabled = false;
+                    btnXoa.Enabled = false;
+                    btnLamMoi.Enabled = false;
+                    btnSua.Enabled = false;
+                }
+            }
         }
 
         public void Load_data()
@@ -37,8 +53,11 @@ namespace DoAn_OOP
 
         private void dtgvTheLoai_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnSua.Enabled = true;
-            btnXoa.Enabled = true;
+            if (frmDangNhap.PQ == "1")          
+                btnXoa.Enabled = true;
+           
+            if ( frmDangNhap.PQ != "3" )
+                btnSua.Enabled = true;
             try
             {
                 DataGridViewRow row = new DataGridViewRow();
@@ -58,6 +77,9 @@ namespace DoAn_OOP
         {
             txtMaTL.Text = "";
             txtTenTL.Text = "";
+            txtTImKiem.Text = "";
+            btnSua.Enabled = false;
+            btnXoa.Enabled = false;
         }
 
         private void btnThem_Click(object sender, EventArgs e)

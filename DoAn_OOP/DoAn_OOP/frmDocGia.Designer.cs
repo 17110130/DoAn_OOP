@@ -29,11 +29,14 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTimKiemDG = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.btnThem = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ptbHinhAnh = new System.Windows.Forms.PictureBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnXuatFileTxt = new System.Windows.Forms.Button();
             this.dtpNgaySinh = new System.Windows.Forms.DateTimePicker();
             this.radNu = new System.Windows.Forms.RadioButton();
             this.btnSua = new System.Windows.Forms.Button();
@@ -50,9 +53,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dtgvDocGia = new System.Windows.Forms.DataGridView();
-            this.btnXuatFileTxt = new System.Windows.Forms.Button();
+            this.opfLoadHinhAnh = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbHinhAnh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvDocGia)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,19 +70,20 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Tìm kiếm:";
             // 
-            // textBox1
+            // txtTimKiemDG
             // 
-            this.textBox1.Location = new System.Drawing.Point(62, 14);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(207, 20);
-            this.textBox1.TabIndex = 2;
+            this.txtTimKiemDG.Location = new System.Drawing.Point(62, 14);
+            this.txtTimKiemDG.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTimKiemDG.Name = "txtTimKiemDG";
+            this.txtTimKiemDG.Size = new System.Drawing.Size(207, 20);
+            this.txtTimKiemDG.TabIndex = 2;
+            this.txtTimKiemDG.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.txtTimKiemDG);
             this.panel1.Location = new System.Drawing.Point(496, 10);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
@@ -98,7 +103,7 @@
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(588, 147);
+            this.btnThem.Location = new System.Drawing.Point(588, 222);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(73, 57);
             this.btnThem.TabIndex = 6;
@@ -108,6 +113,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ptbHinhAnh);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.btnXuatFileTxt);
             this.groupBox1.Controls.Add(this.dtpNgaySinh);
             this.groupBox1.Controls.Add(this.radNu);
@@ -129,16 +136,48 @@
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(21, 70);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(782, 219);
+            this.groupBox1.Size = new System.Drawing.Size(782, 299);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin:";
+            // 
+            // ptbHinhAnh
+            // 
+            this.ptbHinhAnh.BackColor = System.Drawing.Color.Bisque;
+            this.ptbHinhAnh.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ptbHinhAnh.Location = new System.Drawing.Point(432, 58);
+            this.ptbHinhAnh.Name = "ptbHinhAnh";
+            this.ptbHinhAnh.Size = new System.Drawing.Size(156, 149);
+            this.ptbHinhAnh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbHinhAnh.TabIndex = 9;
+            this.ptbHinhAnh.TabStop = false;
+            this.ptbHinhAnh.Click += new System.EventHandler(this.ptbHinhAnh_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(424, 26);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(61, 15);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Hình ảnh:";
+            // 
+            // btnXuatFileTxt
+            // 
+            this.btnXuatFileTxt.Enabled = false;
+            this.btnXuatFileTxt.Location = new System.Drawing.Point(397, 222);
+            this.btnXuatFileTxt.Name = "btnXuatFileTxt";
+            this.btnXuatFileTxt.Size = new System.Drawing.Size(73, 57);
+            this.btnXuatFileTxt.TabIndex = 7;
+            this.btnXuatFileTxt.Text = "Xuất File Txt";
+            this.btnXuatFileTxt.UseVisualStyleBackColor = true;
+            this.btnXuatFileTxt.Click += new System.EventHandler(this.btnXuatFileTxt_Click);
             // 
             // dtpNgaySinh
             // 
             this.dtpNgaySinh.CustomFormat = "dd/MM/yyyy";
             this.dtpNgaySinh.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgaySinh.Location = new System.Drawing.Point(504, 20);
+            this.dtpNgaySinh.Location = new System.Drawing.Point(127, 161);
             this.dtpNgaySinh.Name = "dtpNgaySinh";
             this.dtpNgaySinh.ShowUpDown = true;
             this.dtpNgaySinh.Size = new System.Drawing.Size(254, 22);
@@ -159,7 +198,7 @@
             // btnSua
             // 
             this.btnSua.Enabled = false;
-            this.btnSua.Location = new System.Drawing.Point(685, 147);
+            this.btnSua.Location = new System.Drawing.Point(685, 222);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(73, 57);
             this.btnSua.TabIndex = 6;
@@ -169,7 +208,7 @@
             // 
             // btnLamMoi
             // 
-            this.btnLamMoi.Location = new System.Drawing.Point(492, 147);
+            this.btnLamMoi.Location = new System.Drawing.Point(492, 222);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(73, 57);
             this.btnLamMoi.TabIndex = 6;
@@ -190,14 +229,14 @@
             // 
             // txtSDT
             // 
-            this.txtSDT.Location = new System.Drawing.Point(504, 107);
+            this.txtSDT.Location = new System.Drawing.Point(126, 257);
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(254, 22);
             this.txtSDT.TabIndex = 1;
             // 
             // txtDiaChi
             // 
-            this.txtDiaChi.Location = new System.Drawing.Point(503, 64);
+            this.txtDiaChi.Location = new System.Drawing.Point(126, 207);
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.Size = new System.Drawing.Size(254, 22);
             this.txtDiaChi.TabIndex = 1;
@@ -219,7 +258,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(426, 110);
+            this.label8.Location = new System.Drawing.Point(31, 260);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(35, 15);
             this.label8.TabIndex = 0;
@@ -228,7 +267,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(408, 69);
+            this.label7.Location = new System.Drawing.Point(31, 212);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 15);
             this.label7.TabIndex = 0;
@@ -237,7 +276,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(408, 25);
+            this.label6.Location = new System.Drawing.Point(31, 166);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(68, 15);
             this.label6.TabIndex = 0;
@@ -275,25 +314,18 @@
             this.dtgvDocGia.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dtgvDocGia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvDocGia.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dtgvDocGia.Location = new System.Drawing.Point(0, 294);
+            this.dtgvDocGia.Location = new System.Drawing.Point(0, 374);
             this.dtgvDocGia.Margin = new System.Windows.Forms.Padding(2);
             this.dtgvDocGia.Name = "dtgvDocGia";
             this.dtgvDocGia.RowHeadersWidth = 51;
             this.dtgvDocGia.RowTemplate.Height = 24;
-            this.dtgvDocGia.Size = new System.Drawing.Size(833, 262);
+            this.dtgvDocGia.Size = new System.Drawing.Size(833, 182);
             this.dtgvDocGia.TabIndex = 8;
             this.dtgvDocGia.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvDocGia_CellClick);
             // 
-            // btnXuatFileTxt
+            // opfLoadHinhAnh
             // 
-            this.btnXuatFileTxt.Enabled = false;
-            this.btnXuatFileTxt.Location = new System.Drawing.Point(397, 147);
-            this.btnXuatFileTxt.Name = "btnXuatFileTxt";
-            this.btnXuatFileTxt.Size = new System.Drawing.Size(73, 57);
-            this.btnXuatFileTxt.TabIndex = 7;
-            this.btnXuatFileTxt.Text = "Xuất File Txt";
-            this.btnXuatFileTxt.UseVisualStyleBackColor = true;
-            this.btnXuatFileTxt.Click += new System.EventHandler(this.btnXuatFileTxt_Click);
+            this.opfLoadHinhAnh.FileName = "openFileDialog1";
             // 
             // frmDocGia
             // 
@@ -312,6 +344,7 @@
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbHinhAnh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvDocGia)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -320,7 +353,7 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtTimKiemDG;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnThem;
@@ -342,5 +375,8 @@
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnLamMoi;
         private System.Windows.Forms.Button btnXuatFileTxt;
+        private System.Windows.Forms.PictureBox ptbHinhAnh;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.OpenFileDialog opfLoadHinhAnh;
     }
 }

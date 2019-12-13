@@ -43,7 +43,6 @@ C:\Users\Admin\OneDrive\Máy tính\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\bin\Debug\DoAn_OOP.exe.config
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\bin\Debug\DoAn_OOP.exe
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\bin\Debug\DoAn_OOP.pdb
-C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.csprojAssemblyReference.cache
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.frmDocGia.resources
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.frmFormMain.resources
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.frmKhoSach.resources
@@ -51,9 +50,15 @@ C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.frmNhaXuatB
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.frmQuanLyMuon.resources
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.frmQuanLyTra.resources
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.frmTheLoai.resources
-C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.frmXuLyDocGia.resources
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.Properties.Resources.resources
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.csproj.GenerateResource.cache
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.exe
 C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.pdb
+C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\bin\Debug\EPPlus.dll
+C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\bin\Debug\EPPlus.xml
+C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.csproj.CopyComplete
+C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.frmDangNhap.resources
+C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\Interop.LCC11.dll
+C:\Users\Admin\Desktop\DoAn_OOP\DoAn_OOP\DoAn_OOP\obj\Debug\DoAn_OOP.csproj.ResolveComReference.cache

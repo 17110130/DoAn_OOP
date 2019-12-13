@@ -15,14 +15,27 @@ namespace DoAn_OOP
         public frmFormMain()
         {
             InitializeComponent();
+
+            if ( frmDangNhap.PQ == "2" )
+            {
+                btnNhaXuatBan.Enabled = false;
+                btnTheLoai.Enabled = false;
+            }
+            if ( frmDangNhap.PQ == "3" )
+            {
+                btnDocGia.Enabled = false;
+                btnNhaXuatBan.Enabled = false;
+                btnQuanLyMuon.Enabled = false;
+                btnQuanLyTra.Enabled = false;
+                btnTheLoai.Enabled = false;
+            }
+           
         }
 
         private void btnQuanLyKhoSach_Click(object sender, EventArgs e)
         {
             frmKhoSach khosach = new frmKhoSach();
             khosach.ShowDialog();
-           
-
             
         }
 

@@ -27,6 +27,7 @@ namespace DoAn_OOP
             //Load_dtgvSachDaChon();
             dtpNgayMuonSach.Value = DateTime.Now;          
             dtpHanTraSach.Value = dtpNgayMuonSach.Value.AddDays(10);
+         
         }
 
         public void Load_dtgvTimKiemSach()

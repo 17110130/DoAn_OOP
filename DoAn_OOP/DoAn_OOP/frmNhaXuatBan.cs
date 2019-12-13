@@ -28,6 +28,22 @@ namespace DoAn_OOP
             dtgvNhaXB.Columns["TenNhaXuatBan"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dtgvNhaXB.Columns["DiaChi"].Width = 80;
             dtgvNhaXB.Columns["SDT"].Width = 100;
+
+            //if ( frmDangNhap.PQ == "2" )
+            //{
+            //    btnAddNXB.Enabled = false;
+            //    btnDeletenxb.Enabled = false;
+            //}
+            //else
+            //{
+            //    if ( frmDangNhap.PQ == "3" )
+            //    {
+            //        btnAddNXB.Enabled = false;
+            //        btnDeletenxb.Enabled = false;
+            //        btnClearnxb.Enabled = false;
+            //        btnUpdatenxb.Enabled = false;
+            //    }
+            //}
         }
         public void Load_data_NXB()
         {
@@ -110,6 +126,9 @@ namespace DoAn_OOP
             txtTenNXB.Text = "";
             txtDiaChi.Text = "";
             txtSdt.Text = "";
+            txtTimKiemNXB.Enabled = false;
+            btnUpdatenxb.Enabled = false;
+            btnDeletenxb.Enabled = false;
         }
 
         private void btnClearnxb_Click(object sender, EventArgs e)

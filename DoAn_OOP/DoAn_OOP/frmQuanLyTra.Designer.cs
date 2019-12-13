@@ -39,7 +39,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grbThongTinDocGia = new System.Windows.Forms.GroupBox();
             this.btnXong = new System.Windows.Forms.Button();
             this.cbMaDG = new System.Windows.Forms.ComboBox();
             this.dtpNgSinh = new System.Windows.Forms.DateTimePicker();
@@ -60,7 +60,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvSachMuon)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.grbThongTinDocGia.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +68,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSalmon;
             this.panel1.Controls.Add(this.groupBox2);
-            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.grbThongTinDocGia);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -180,30 +180,30 @@
             this.label19.TabIndex = 0;
             this.label19.Text = "Ngày mượn:";
             // 
-            // groupBox1
+            // grbThongTinDocGia
             // 
-            this.groupBox1.Controls.Add(this.btnXong);
-            this.groupBox1.Controls.Add(this.cbMaDG);
-            this.groupBox1.Controls.Add(this.dtpNgSinh);
-            this.groupBox1.Controls.Add(this.radNu);
-            this.groupBox1.Controls.Add(this.radNam);
-            this.groupBox1.Controls.Add(this.lblSDT);
-            this.groupBox1.Controls.Add(this.lblDiaChi);
-            this.groupBox1.Controls.Add(this.lblHoTen);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(406, 312);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Thông tin độc giả:";
+            this.grbThongTinDocGia.Controls.Add(this.btnXong);
+            this.grbThongTinDocGia.Controls.Add(this.cbMaDG);
+            this.grbThongTinDocGia.Controls.Add(this.dtpNgSinh);
+            this.grbThongTinDocGia.Controls.Add(this.radNu);
+            this.grbThongTinDocGia.Controls.Add(this.radNam);
+            this.grbThongTinDocGia.Controls.Add(this.lblSDT);
+            this.grbThongTinDocGia.Controls.Add(this.lblDiaChi);
+            this.grbThongTinDocGia.Controls.Add(this.lblHoTen);
+            this.grbThongTinDocGia.Controls.Add(this.label6);
+            this.grbThongTinDocGia.Controls.Add(this.label5);
+            this.grbThongTinDocGia.Controls.Add(this.label4);
+            this.grbThongTinDocGia.Controls.Add(this.label3);
+            this.grbThongTinDocGia.Controls.Add(this.label7);
+            this.grbThongTinDocGia.Controls.Add(this.label2);
+            this.grbThongTinDocGia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.grbThongTinDocGia.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbThongTinDocGia.Location = new System.Drawing.Point(12, 12);
+            this.grbThongTinDocGia.Name = "grbThongTinDocGia";
+            this.grbThongTinDocGia.Size = new System.Drawing.Size(406, 312);
+            this.grbThongTinDocGia.TabIndex = 2;
+            this.grbThongTinDocGia.TabStop = false;
+            this.grbThongTinDocGia.Text = "Thông tin độc giả:";
             // 
             // btnXong
             // 
@@ -372,14 +372,15 @@
             this.Name = "frmQuanLyTra";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Trả";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmQuanLyTra_FormClosing);
             this.Load += new System.EventHandler(this.frmQuanLyTra_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvSachMuon)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grbThongTinDocGia.ResumeLayout(false);
+            this.grbThongTinDocGia.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -388,7 +389,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grbThongTinDocGia;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;

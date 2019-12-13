@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace DoAn_OOP
 {
@@ -16,9 +17,12 @@ namespace DoAn_OOP
         public frmDocGia()
         {
             InitializeComponent();
+            
         }
         QLThuvien1DataContext db = new QLThuvien1DataContext();
         DocGia dg = new DocGia();
+
+        
         private void frmDocGia_Load(object sender, EventArgs e)
         {
             Load_datadocgia();
@@ -28,7 +32,8 @@ namespace DoAn_OOP
             dtgvDocGia.Columns["NgaySinh"].HeaderText = "Ngày sinh";
             dtgvDocGia.Columns["DiaChi"].HeaderText = "Địa chỉ";
             dtgvDocGia.Columns["SDT"].HeaderText = "Số điện thoại";
-            dtgvDocGia.Columns["HoTen"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dtgvDocGia.Columns["HoTen"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;  
+                  
         }
         public void Load_datadocgia()
         {            
@@ -100,7 +105,14 @@ namespace DoAn_OOP
                     else d.NgaySinh = (DateTime)dtpNgaySinh.Value;
                     d.DiaChi = txtDiaChi.Text;
                     d.SDT = txtSDT.Text;
-
+                    // Lưu ảnh xuống database
+                    if ( ptbHinhAnh.Image != null )
+                    {
+                        MemoryStream stream = new MemoryStream();
+                        ptbHinhAnh.Image.Save(stream, ImageFormat.Jpeg);
+                        d.HinhAnh = stream.ToArray();
+                    }
+                    
                     db.DocGias.InsertOnSubmit(d);
                     db.SubmitChanges();
 
@@ -153,40 +165,56 @@ namespace DoAn_OOP
             dtpNgaySinh.Value = DateTime.Now;
             txtDiaChi.Text = "";
             txtSDT.Text = "";
+            ptbHinhAnh.Image = null;
+            btnXuatFileTxt.Enabled = false;
+            txtTimKiemDG.Text = "";
+            btnSua.Enabled = false;
         }
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            Lam_moi();
+            Lam_moi();         
         }
 
         private void dtgvDocGia_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            Lam_moi();
             btnSua.Enabled = true;
             btnXuatFileTxt.Enabled = true;
 
-            DataGridViewRow row = new DataGridViewRow();
-            row = dtgvDocGia.Rows[e.RowIndex];
-            try
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
             {
-                txtMaDocGia.Text = row.Cells[0].Value.ToString();
-                txtHoTen.Text = row.Cells[1].Value.ToString();
-                var gioitinh = row.Cells[2].Value.ToString();
-                if (gioitinh == "True")
-                    radNam.Checked = true;
-                else radNu.Checked = true;
-                var ns = row.Cells[3].Value;
-                dtpNgaySinh.Value = (DateTime)ns;
-                txtDiaChi.Text= row.Cells[4].Value.ToString();
-                txtSDT.Text= row.Cells[5].Value.ToString();               
-            }
-            catch (Exception) { }
+                
+                DataGridViewRow row = new DataGridViewRow();
+                row = dtgvDocGia.Rows[e.RowIndex];
+                try
+                {
+                    txtMaDocGia.Text = row.Cells[0].Value.ToString();
+                    txtHoTen.Text = row.Cells[1].Value.ToString();
+                    var gioitinh = row.Cells[2].Value.ToString();
+                    if (gioitinh == "True")
+                        radNam.Checked = true;
+                    else radNu.Checked = true;
+                    var ns = row.Cells[3].Value;
+                    dtpNgaySinh.Value = (DateTime)ns;
+                    txtDiaChi.Text = row.Cells[4].Value.ToString();
+                    txtSDT.Text = row.Cells[5].Value.ToString();
+                    //Load ảnh từ database lên
+                    var x = db.DocGias.Where(p => p.IDDocGia.Equals(txtMaDocGia.Text)).FirstOrDefault();
+                    if (x == null)
+                        return;
+                    MemoryStream me = new MemoryStream(x.HinhAnh.ToArray());
+                    Image img = Image.FromStream(me);
+                    if (img == null)
+                        return;
+                    ptbHinhAnh.Image = img;
+                }
+                catch (Exception) { }
+            }              
         }
 
         private void btnXuatFileTxt_Click(object sender, EventArgs e)
-        {
-            //Console.OutputEncoding = Encoding.UTF8;
-
+        {        
             FileStream fw = null;
             string msg = "";
             byte[] msgByte = null;
@@ -211,6 +239,40 @@ namespace DoAn_OOP
             if (fw != null) fw.Close();
 
             MessageBox.Show("The file Bill.txt have created!");
+        }
+
+        private void ptbHinhAnh_Click(object sender, EventArgs e)
+        {
+            opfLoadHinhAnh.ShowDialog();
+            string file = opfLoadHinhAnh.FileName;
+            if ( string.IsNullOrEmpty(file) )           
+                return;
+#pragma warning disable CS0162 // Unreachable code detected
+                Image myImage = Image.FromFile(file);
+#pragma warning restore CS0162 // Unreachable code detected
+                ptbHinhAnh.Image = myImage;
+            // Lỗi khi đóng file dialog
+            
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
+            {
+                //var list = db.DocGias.Where(p => p.IDDocGia.Equals(txtTimKiemDG.Text)).FirstOrDefault();
+                dtgvDocGia.DataSource = from s in db.DocGias
+                                        where s.IDDocGia == txtTimKiemDG.Text
+                                        select new
+                                        {
+                                            IDDocGia = s.IDDocGia,
+                                            HoTen = s.HoTen,
+                                            GioiTinh = s.GioiTinh,
+                                            NgaySinh = s.NgaySinh,
+                                            DiaChi = s.DiaChi,
+                                            SDT = s.SDT
+
+                                        };
+            }
         }
     }
 }

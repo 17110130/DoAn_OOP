@@ -1,26 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLThuvien" Class="QLThuvien1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-EH88R88;Initial Catalog=QLThuvien;Integrated Security=True" SettingsObjectName="DoAn_OOP.Properties.Settings" SettingsPropertyName="QLThuvienConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.NhaXuatBan" Member="NhaXuatBans">
-    <Type Name="NhaXuatBan">
-      <Column Name="IDNhaXuatBan" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="TenNhaXuatBan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="SDT" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="NhaXuatBan_ThongTinSach" Member="ThongTinSaches" ThisKey="IDNhaXuatBan" OtherKey="NhaXuatBan" Type="ThongTinSach" />
-    </Type>
-  </Table>
-  <Table Name="dbo.DocGia" Member="DocGias">
-    <Type Name="DocGia">
-      <Column Name="IDDocGia" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="HoTen" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="GioiTinh" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="NgaySinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="SDT" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="DocGia_MuonQuaHan" Member="MuonQuaHans" ThisKey="IDDocGia" OtherKey="IDDocGia" Type="MuonQuaHan" />
-      <Association Name="DocGia_PhieuMuon" Member="PhieuMuons" ThisKey="IDDocGia" OtherKey="IDDocGia" Type="PhieuMuon" />
-    </Type>
-  </Table>
   <Table Name="dbo.MuonQuaHan" Member="MuonQuaHans">
     <Type Name="MuonQuaHan">
       <Column Name="IDDocGia" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -31,6 +10,15 @@
       <Association Name="DocGia_MuonQuaHan" Member="DocGia" ThisKey="IDDocGia" OtherKey="IDDocGia" Type="DocGia" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.NhaXuatBan" Member="NhaXuatBans">
+    <Type Name="NhaXuatBan">
+      <Column Name="IDNhaXuatBan" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenNhaXuatBan" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SDT" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="NhaXuatBan_ThongTinSach" Member="ThongTinSaches" ThisKey="IDNhaXuatBan" OtherKey="NhaXuatBan" Type="ThongTinSach" />
+    </Type>
+  </Table>
   <Table Name="dbo.PhieuMuon" Member="PhieuMuons">
     <Type Name="PhieuMuon">
       <Column Name="IDDocGia" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -38,8 +26,8 @@
       <Column Name="NgayMuon" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="NgayTra" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="DocGia_PhieuMuon" Member="DocGia" ThisKey="IDDocGia" OtherKey="IDDocGia" Type="DocGia" IsForeignKey="true" />
       <Association Name="ThongTinSach_PhieuMuon" Member="ThongTinSach" ThisKey="IDSach" OtherKey="IDSach" Type="ThongTinSach" IsForeignKey="true" />
+      <Association Name="DocGia_PhieuMuon" Member="DocGia" ThisKey="IDDocGia" OtherKey="IDDocGia" Type="DocGia" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TheLoai" Member="TheLoais">
@@ -61,6 +49,26 @@
       <Association Name="ThongTinSach_PhieuMuon" Member="PhieuMuons" ThisKey="IDSach" OtherKey="IDSach" Type="PhieuMuon" />
       <Association Name="NhaXuatBan_ThongTinSach" Member="NhaXuatBan1" ThisKey="NhaXuatBan" OtherKey="IDNhaXuatBan" Type="NhaXuatBan" IsForeignKey="true" />
       <Association Name="TheLoai_ThongTinSach" Member="TheLoai" ThisKey="IDTheLoai" OtherKey="IDTheLoai" Type="TheLoai" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DocGia" Member="DocGias">
+    <Type Name="DocGia">
+      <Column Name="IDDocGia" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="GioiTinh" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SDT" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="HinhAnh" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="DocGia_MuonQuaHan" Member="MuonQuaHans" ThisKey="IDDocGia" OtherKey="IDDocGia" Type="MuonQuaHan" />
+      <Association Name="DocGia_PhieuMuon" Member="PhieuMuons" ThisKey="IDDocGia" OtherKey="IDDocGia" Type="PhieuMuon" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TaiKhoan" Member="TaiKhoans">
+    <Type Name="TaiKhoan">
+      <Column Name="TaiKhoan" Member="TaiKhoan1" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MatKhau" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PhanQuyen" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

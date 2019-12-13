@@ -20,7 +20,7 @@ namespace DoAn_OOP
 
         private void frmQuanLyTra_Load(object sender, EventArgs e)
         {
-            Load_MaDG();
+            Load_MaDG();          
         }
 
         public void Load_MaDG()
@@ -157,20 +157,45 @@ namespace DoAn_OOP
         {
             using (QLThuvien1DataContext db = new QLThuvien1DataContext())
             {
-                var x = (from s in db.PhieuMuons
-                         where s.IDDocGia == cbMaDG.Text
-                         select s).SingleOrDefault();
-                if ( x == null )
+                if ( cbMaDG.Text != "" )
                 {
-                    var dg = db.DocGias.Where(p => p.IDDocGia.Equals(cbMaDG.Text)).SingleOrDefault();
-                    db.DocGias.DeleteOnSubmit(dg);
-                    db.SubmitChanges();
+                    var x = (from s in db.PhieuMuons
+                             where s.IDDocGia == cbMaDG.Text
+                             select s).SingleOrDefault();
+
+                    if (x == null)
+                    {
+                        var dg = db.DocGias.Where(p => p.IDDocGia.Equals(cbMaDG.Text)).SingleOrDefault();
+                        db.DocGias.DeleteOnSubmit(dg);
+                        db.SubmitChanges();
+                    }
                 }
+               
                 Load_MaDG();
                 Lam_Moi();
             }           
         }
 
-       
+        private void frmQuanLyTra_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            using (QLThuvien1DataContext db = new QLThuvien1DataContext())
+            {
+                if (cbMaDG.Text != "")
+                {
+                    var x = (from s in db.PhieuMuons
+                             where s.IDDocGia == cbMaDG.Text
+                             select s).SingleOrDefault();
+
+                    if (x == null)
+                    {
+                        var dg = db.DocGias.Where(p => p.IDDocGia.Equals(cbMaDG.Text)).SingleOrDefault();
+                        db.DocGias.DeleteOnSubmit(dg);
+                        db.SubmitChanges();
+                    }
+                }
+                Load_MaDG();
+                Lam_Moi();
+            }
+        }
     }
 }

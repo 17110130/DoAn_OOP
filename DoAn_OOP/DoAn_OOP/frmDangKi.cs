@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace DoAn_OOP
 {
-    public partial class frmXuLyDocGia : Form
+    public partial class frmDangKi : Form
     {
-        public frmXuLyDocGia()
+        public frmDangKi()
         {
             InitializeComponent();
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

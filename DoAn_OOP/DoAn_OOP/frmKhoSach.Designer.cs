@@ -279,7 +279,6 @@
             // btnXuatFileExcel
             // 
             this.btnXuatFileExcel.BackColor = System.Drawing.Color.LawnGreen;
-            this.btnXuatFileExcel.Enabled = false;
             this.btnXuatFileExcel.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXuatFileExcel.Location = new System.Drawing.Point(704, 549);
             this.btnXuatFileExcel.Name = "btnXuatFileExcel";
