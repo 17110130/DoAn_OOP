@@ -21,6 +21,7 @@ namespace DoAn_OOP
             InitializeComponent();
            // this.idsach = idsach;            
         }
+        DataTable dt;
         QLThuvien1DataContext db = new QLThuvien1DataContext();
        // private string idsach;
         
@@ -193,7 +194,134 @@ namespace DoAn_OOP
 
         private void btnXuatFileExcel_Click(object sender, EventArgs e)
         {
-            
+            string filePath = "";
+            // tạo SaveFileDialog để lưu file excel
+            SaveFileDialog dialog = new SaveFileDialog();
+
+            // chỉ lọc ra các file có định dạng Excel
+            dialog.Filter = "Excel | *.xlsx | Excel 2003 | *.xls";
+
+            // Nếu mở file và chọn nơi lưu file thành công sẽ lưu đường dẫn lại dùng
+            dialog.ShowDialog();
+
+            filePath = dialog.FileName;
+
+
+            // nếu đường dẫn null hoặc rỗng thì báo không hợp lệ và return hàm
+            if (string.IsNullOrEmpty(filePath))
+            {
+                MessageBox.Show("Đường dẫn báo cáo không hợp lệ");
+                return;
+            }
+
+            try
+            {
+                using (ExcelPackage p = new ExcelPackage())
+                {
+                    // đặt tên người tạo file
+                    p.Workbook.Properties.Author = "Phần mềm quản lý sinh viên";
+
+                    // đặt tiêu đề cho file
+                    p.Workbook.Properties.Title = "Thông kê sinh viên";
+
+                    //Tạo một sheet để làm việc trên đó
+                    p.Workbook.Worksheets.Add("Quản lý Sinh Viên");
+
+                    // lấy sheet vừa add ra để thao tác
+                    ExcelWorksheet ws = p.Workbook.Worksheets[1];
+
+                    // đặt tên cho sheet
+                    ws.Name = "Quản lý sinh viên";
+                    // fontsize mặc định cho cả sheet
+                    ws.Cells.Style.Font.Size = 14;
+                    // font family mặc định cho cả sheet
+                    ws.Cells.Style.Font.Name = "Calibri";
+
+                   
+                    // Tạo danh sách các column header
+                    string[] arrColumnHeader = {
+                                                "ID Sách",
+                                                "ID Thể Loại",
+                                                "Tên Sách",
+                                                "Nhà Xuất Bản",
+                                                "Ngày Nhập Kho",
+                                                "Giá",
+                                                "Tồn Kho"
+                };
+
+                    // lấy ra số lượng cột cần dùng dựa vào số lượng header
+                    var countColHeader = arrColumnHeader.Count();
+
+                    // merge các column lại từ column 1 đến số column header
+                    // gán giá trị cho cell vừa merge là Thống kê thông tni User Kteam
+                    ws.Cells[1, 1].Value = "QUẢN LÝ SINH VIÊN";
+                    ws.Cells[1, 1, 1, countColHeader].Merge = true;
+                    // in đậm
+                    ws.Cells[1, 1, 1, countColHeader].Style.Font.Bold = true;
+                    // font size
+                    ws.Cells[1, 1, 1, countColHeader].Style.Font.Size = 25;
+                    // căn giữa
+                    ws.Cells[1, 1, 1, countColHeader].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                    int colIndex = 1;
+                    int rowIndex = 2;
+
+                    //tạo các header từ column header đã tạo từ bên trên
+                    ws.Column(1).Width = 30;
+                    ws.Column(2).Width = 30;
+                    ws.Column(3).Width = 15;
+                    ws.Column(4).Width = 15;
+                    ws.Column(5).Width = 15;
+                    ws.Column(6).Width = 15;
+                    ws.Column(7).Width = 15;
+                    ws.Column(8).Width = 15;
+                    ws.Column(9).Width = 30;
+                    ws.Column(10).Width = 40;
+
+                    foreach (var item in arrColumnHeader)
+                    {
+                        var cell = ws.Cells[rowIndex, colIndex];
+                        var fill = cell.Style.Fill;
+                        fill.PatternType = ExcelFillStyle.Solid;
+                        fill.BackgroundColor.SetColor(System.Drawing.Color.LightBlue);
+
+
+                        //căn chỉnh các border
+                        var border = cell.Style.Border;
+                        border.Bottom.Style =
+                            border.Top.Style =
+                            border.Left.Style =
+                            border.Right.Style = ExcelBorderStyle.Thin;
+                        cell.Value = item;
+                        colIndex++;
+                    }
+                    // Duyệt datagird
+                    var list = from s in db.ThongTinSaches
+                               select new { s.IDSach, s.IDTheLoai, s.TenSach, s.NhaXuatBan, s.NgayNhapKho, s.Gia, s.TonKho };
+
+                    foreach(var item in list)
+                    {
+                        colIndex = 1;
+                        rowIndex++;
+
+                        ws.Cells[rowIndex, colIndex++].Value = item.IDSach;
+                        ws.Cells[rowIndex, colIndex++].Value = item.IDTheLoai;
+                        ws.Cells[rowIndex, colIndex++].Value = item.TenSach;
+                        ws.Cells[rowIndex, colIndex++].Value = item.NhaXuatBan;
+                        ws.Cells[rowIndex, colIndex++].Value = item.NgayNhapKho;
+                        ws.Cells[rowIndex, colIndex++].Value = item.Gia;
+                        ws.Cells[rowIndex, colIndex++].Value = item.TonKho;
+                    }
+                    //Lưu file lại
+                    Byte[] bin = p.GetAsByteArray();
+                    File.WriteAllBytes(filePath, bin);
+                }
+                MessageBox.Show("Xuất file excel thành công!");
+            }
+            catch (Exception EE)
+            {
+                MessageBox.Show("Có lỗi khi lưu file!");
+            }
         }
     }
 }
